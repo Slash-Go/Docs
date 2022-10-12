@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: SlashGo API
+  description: |-
+    Documentation for **SlashGo**, an open-source intra-organization link management system designed to allow organizations to share and collaborate on internal information, powered by shortlinks.
+
+    Some examples of *SlashGo shortlinks* users use today:
+    - `go/onboarding` to link to onboarding docs
+    - `go/bug/12345` to link to your bug with id `12345` in your bug tracker
+    - `go/okrs` to redirect to the OKRs for the current quarter
+
+    Better yet, SlashGo also allows you to customise the keyword-rigger for your organization, so you could use `xyz/payroll` or `our/details` instead of `go/`
+
+    **SlashGo** is made available under the [MIT License](https://opensource.org/licenses/MIT) 
+
+    Link to code repos:
+    - [Documentation](https://github.com/Slash-Go/docs)
+    - [SlashGo Server](https://github.com/Slash-Go/SlashGoServer)
+    - [SlashGo Extension](https://github.com/Slash-Go/SlashGoExtension)
+
+  contact:
+    email: root@slashgo.link
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+  - url: https://api.slashgo.link/
+tags:
+  - name: Health
+    description: Monitor API health
+  - name: Auth
+    description: Authentication APIs
+  - name: Organizations
+    description: Managing organizations
+  - name: Users
+    description: Managing users of an org
+  - name: Links
+    description: CRUD APIs for Shortlinks
+
+paths:
+  /health/status:
+    get:
+      tags:
+        - Health
+      summary: SlashGo Server Status
+      description: Get status of SlashGo API Server
+      operationId: getHealthStatus
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+        "500":
+          description: Server is down/unresponsive
