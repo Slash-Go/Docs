@@ -56,3 +56,132 @@ paths:
                 example: OK
         "500":
           description: Server is down/unresponsive
+
+  /login:
+    post:
+      tags:
+        - Auth
+      summary: authenticate the user.
+      description: User authentication.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object             
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+            description: sucessfully logged in.
+        '401':
+            description: email or password not provided.
+
+  /login_google:
+    post:
+      tags:
+        - Auth
+      summary: Login with google account.
+      description: Login using google credentials.
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+      responses:
+        '200':
+            description: login successful.         
+        '401':
+            description: Authentication error
+
+  /refresh:
+    post:
+      tags:
+        - Auth
+      summary: refresh token
+      description: refresh the token 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                  refreshToken:
+                    type: string
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: Invalid token.
+        '500':
+          description: Unknown error in token refresh.
+
+  /reset_password_request:
+    post:
+      tags:
+        - Auth
+      summary: password reset request
+      description: Password reset request
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email:
+                    type: string
+      responses:
+        '200':
+          description: reset successful.
+        '401':
+          description: email not provided
+        '500':
+          description: Unk nown error
+
+  /reset_password:
+    post:
+      tags:
+        - Auth
+      summary: Password reset
+      description: reset password
+      requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    token:
+                      type: string
+                    userId:
+                      type: string
+                    password:
+                      type: string
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: Bad request
+        '500':
+          description: Unknown error
+
+
+
+        
+
+
+
+
+
+        
+
+       
